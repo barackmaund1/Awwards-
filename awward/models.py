@@ -2,6 +2,7 @@ from django.db import models
 from pyuploadcare.dj.models import ImageField
 import datetime as dt
 from django.contrib.auth.models import User
+
 # Create your models here.
 
 class Post(models.Model):
@@ -38,7 +39,7 @@ class Rating(models.Model):
     creativity = models.IntegerField(choices=CHOICES, blank=True,default=0)
     content = models.IntegerField(choices=CHOICES, blank=True,default=0)
     overall_score = models.FloatField(blank=True,default=0)
-    project = models.ForeignKey(Project,on_delete=models.CASCADE)
+    project = models.ForeignKey(Post,on_delete=models.CASCADE)
     author = models.ForeignKey(User, on_delete=models.CASCADE, null=True, related_name='rater')
     
     def save_rating(self):

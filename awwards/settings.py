@@ -35,6 +35,7 @@ INSTALLED_APPS = [
     'awward',
     'apis',
     'bootstrap4',
+    'pyuploadcare.dj',
     'crispy_forms',
     'django.contrib.admin',
     'django.contrib.auth',
@@ -43,6 +44,11 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 ]
+
+UPLOADCARE = {
+    'pub_key': '2b709bca64245dd9e55e',
+    'secret': '0a60851de5f3db2dc728',
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
