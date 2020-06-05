@@ -134,6 +134,13 @@ LOGIN_REDIRECT_URL='posts'
 LOGIN_URL='login'
 
 
+
+
+# Extra places for collectstatic to find static files.
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
 
 # Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
