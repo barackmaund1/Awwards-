@@ -7,7 +7,12 @@
     <span>|</span>
     <div class="user-panel">
       <a href="{%url 'login'%}" class="login">Login</a>
-      <a href="{%url 'register'%}" class="register">Create an account</a>
+      
+     
+      <button class='register' class="btn btn-info btn-sm" id="site" data-toggle="modal" data-target=".bd-example-modal-xl">
+        Submit your site
+    </button>
+     
     </div> 
   </div>
   <ul class="main-menu">
@@ -15,8 +20,9 @@
     <li><a href="#">About</a></li>
     <li><a href="#">Profile</a>
       <ul class="sub-menu">
-        <li><a href="category.html">logout</a></li>
+        <li><a href="{%url 'logout'%}">logout</a></li>
         <li><a href="{%url 'profile'%}">view profile</a></li>
+       <li><a href="{%url 'register'%}" >sign up</a></li>  
         
       </ul>
     </li>

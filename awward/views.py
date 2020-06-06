@@ -3,7 +3,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.contrib.auth.models import User
 from django.views.generic import ListView,DetailView,CreateView,UpdateView, DeleteView
 from .models import Rating,Post
-from .forms import UploadForm
+from .forms import PostForm
 # Create your views here.
 class PostListView(LoginRequiredMixin,ListView):
     model=Post
@@ -22,20 +22,20 @@ class UserPostListView(ListView,LoginRequiredMixin):
 
 class PostDetailView(DetailView,LoginRequiredMixin):
     model = Post 
-    context_object_name = 'project'
+    context_object_name = 'post'
 
     
      
 class PostCreateView(LoginRequiredMixin, CreateView):
     model = Post
-    form_class=UploadForm
+    form_class=PostForm
     # success_url = 'user/<str:username>'
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = Post
-    form_class=UploadForm
+    form_class=PostForm
     def form_valid(self, form):
         form.instance.author = self.request.user
         return super().form_valid(form)
