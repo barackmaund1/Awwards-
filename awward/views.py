@@ -7,7 +7,7 @@ from .forms import UploadForm
 # Create your views here.
 class PostListView(LoginRequiredMixin,ListView):
     model=Post
-    context_object_name = 'project'
+    context_object_name = 'projects'
     ordering = ['-date_posted']
    
 class UserPostListView(ListView,LoginRequiredMixin):

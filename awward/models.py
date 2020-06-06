@@ -12,7 +12,7 @@ class Post(models.Model):
     technologies = models.CharField(max_length=200, blank=True)
     photo = ImageField(manual_crop='1280x720')
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="posts")
-    date = models.DateTimeField(auto_now_add=True, blank=True)
+    date_posted = models.DateTimeField(auto_now_add=True, blank=True)
 
     def __str__(self):
         return f'{self.title}'
