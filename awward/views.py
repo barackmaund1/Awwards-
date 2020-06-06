@@ -97,6 +97,19 @@ def project(request,project_id):
     "ratings":ratings,"form":form, "message":message, 'total_design':total_design, 'total_usability':total_usability, 
     'total_creativity':total_creativity, 'total_content':total_content})
 
-
+def search_project(request):
+    if request.method == 'GET':
+        title = request.GET.get("title")
+        results = Post.objects.filter(title__icontains=title).all()
+        
+        message = f'name'
+        params = {
+            'results': results,
+            'message': message
+        }
+        return render(request, 'awward/results.html', params)
+    else:
+        message = "You haven't searched for any image category"
+    return render(request, 'awward/results.html', {'message': message})
 
 

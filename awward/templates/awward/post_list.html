@@ -62,8 +62,8 @@
             </div>
             <div class="col-lg-6">
                 <div class="d-flex h-100 align-items-end">
-                    <form class="search-form">
-                        <input type="text" placeholder="Hit it">
+                    <form class="search-form" action="{% url 'search' %}" method="get">
+                        <input type="text" placeholder="Hit it" name="title">
                         <button>Search</button>
                     </form>
                 </div>
