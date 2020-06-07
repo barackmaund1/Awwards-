@@ -1,23 +1,33 @@
 {% extends 'awward/base.html' %}
 {% load crispy_forms_tags %}
 {% block content %}
-<div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group" enctype="multipart/form-data">
-                <legend class="border-bottom mb-4">Upload Today</legend>
-                
-                {{ form|crispy }}
-            </fieldset>
-            <div class="form-group">
-                
-               <button class="btn btn-outline-info" type="submit">Upload now</button>
+<div class="container-fluid">
+    <br>
+    <br>
+    
+    <div class="row">
+      <div class="col-md-4">
+  
+      </div>
+      <div class="col-md-4">
+          <div class="card border-primary">
+              <div class="card-header">New Project</div>
+              <div class="card-body text-primary">
+                  <form  method="post" action="{%url 'project-create'%}" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div class="form-group w3-center">
+                      <input type="submit" class=" w3-center w3-margin w3-button w3-theme-d5" value="Post">
+                    </div>
+                    <input type="hidden" name="next" value="{{next}}">
+                  </form>
+              </div>
             </div>
-        </form>
+      </div>
+      <div class="col-md-4">
+        
+      </div>
     </div>
-    <div class="col-md-3"></div>
-</div>
-
+  </div>
+  {{form.media}}
 {% endblock %}

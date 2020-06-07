@@ -1,6 +1,6 @@
 from django.contrib.auth.mixins import LoginRequiredMixin,UserPassesTestMixin
 from django.contrib.auth.models import User
-from django.views.generic import ListView,DetailView,CreateView
+from django.views.generic import ListView,DetailView
 from .models import Rating,Post
 from .forms import PostForm,RatingForm
 from django.contrib.auth.decorators import login_required
@@ -24,16 +24,6 @@ class UserPostListView(ListView,LoginRequiredMixin):
         return Image.objects.filter(author=user).order_by('-date_posted')
 
 
-
-    
-     
-class PostCreateView(LoginRequiredMixin, CreateView):
-    model = Post
-    form_class=PostForm
-    # success_url = 'user/<str:username>'
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
 
 @login_required(login_url='login')
 def project(request,project_id):
@@ -111,5 +101,19 @@ def search_project(request):
     else:
         message = "You haven't searched for any image category"
     return render(request, 'awward/results.html', {'message': message})
+@login_required(login_url='login')
+def upload(request):
+    current_user = request.user
+    profile =Profile.objects.get(user=current_user)
+    if request.method == 'POST':
+        form = PostForm(request.POST, request.FILES)
+        if form.is_valid():
+            image = form.save(commit=False)
+            image.author = current_user
+            image.save()
+            return redirect('projects')
+    else:
+        form = PostForm()
+    return render(request, 'awward/post_form.html',  {'form': form,'profile':profile})
 
 

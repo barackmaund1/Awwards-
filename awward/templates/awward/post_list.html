@@ -1,15 +1,19 @@
 {% extends 'awward/base.html' %}
 {% load static %}
+{% load crispy_forms_tags %}
 {% block content %}
 
 <section class="hero-section">
 <div class="hero-slider owl-carousel">
       {% for project in projects %}
+      <h4 class='time'>Site of the Day :{{project.date_posted|date}}</h4>
         <div class="hs-item">
             <div class="container">
                 <div class="row">
+                  
                     <div class="col-lg-6">
                         <div class="hs-text">
+                            
                             <h2><span>{{project.author}}</span> {{project.title}}.</h2>
                             <p>{{project.description|truncatechars_html:170}}. </p>
                             <a href="{{ project.url }}" class="site-btn">live site</a>
@@ -18,7 +22,7 @@
                     </div>
                     <div class="col-lg-6">
                         <div class="hr-img">
-                            <img src="{{ project.photo.cdn_url }}" alt="maundu">
+                            <a href="{% url 'project' project.id %}"><img src="{{ project.photo.cdn_url }}" alt="maundu"></a>
                         </div>
                         
                     </div>
@@ -29,27 +33,45 @@
         
     </div>
 </section>
-<section class="playlist-section spad">
-    <div class="container-fluid">
-        <div class="section-title">
-            <h2>Playlists</h2>
-        </div>                                            
-        <div class="clearfix"></div>
-        {%for project in projects%}
-        <div class="row playlist-area">
-            <div class="mix col-lg-3 col-md-4 col-sm-6 genres">
-                <div class="playlist-item">
-                    <img src="{{project.photo.cdn_url}}" alt="">
-                    <h5>Live Concerts</h5>
+
+<!-- Playlist section end -->
+<section class="concept-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="section-title">
+                    <h2>Projectlist</h2>
                 </div>
             </div>
-
+            <div class="col-lg-6">
+                <p></p>
+            </div>
         </div>
-        {%endfor%}
+        <div class="row">
+            {%for project in projects%}
+            <div class="col-lg-3 col-sm-6">
+                <div class="concept-item">
+                    <a href="{% url 'project' project.id %}"><img src="{{project.photo.cdn_url}}"  alt=""></a>
+                    <h5>{{project.description}}</h5>
+                    <p>{{project.technologies}}</p>
+                    <p>{{project.rating.overall_score}}</p>
+                </div>
+                <h6 class="card-title"><a href="{% url 'projects' %}">{{project.title|title}}</a> <a
+                    class="btn btn-sm btn-outline-info" href="{{ project.url }}" style="">Preview</a></h6>
+
+                <p class="card-text "><img src="{{project.author.profile.image.url}}"
+                                        class="nav-img mr-2"
+                                        alt="" height="10%" width="20%">
+                    By {{project.author}} <span style="float:right">{{project.date_posted|date}}</span>
+
+
+                </p>
+                <hr>
+            </div>
+            {%endfor%}
+        </div>
     </div>
 </section>
-<!-- Playlist section end -->
-
 <!-- Help section end -->
 <section class="help-section spad pt-0">
     <div class="container">
@@ -63,7 +85,7 @@
             <div class="col-lg-6">
                 <div class="d-flex h-100 align-items-end">
                     <form class="search-form" action="{% url 'search' %}" method="get">
-                        <input type="text" placeholder="Hit it" name="title">
+                        <input type="text" placeholder="search project" name="title">
                         <button>Search</button>
                     </form>
                 </div>
