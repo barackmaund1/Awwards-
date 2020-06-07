@@ -102,9 +102,7 @@ def search_project(request):
     else:
         message = "You haven't searched for any image category"
     return render(request, 'awward/results.html', {'message': message})
-def projectsearch(request):
-    title= request.POST.get('name of the project')
-    return JsonResponse(data)
+
 @login_required(login_url='login')
 def upload(request):
     current_user = request.user

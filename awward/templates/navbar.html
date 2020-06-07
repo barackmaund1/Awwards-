@@ -2,7 +2,7 @@
 {% load crispy_forms_tags %}
 <header class="header-section clearfix">
   <a href="/" class="site-logo">
-    <img src="{%static 'img/log3.png'%}" height="50%" width="30%" alt="">
+    <img src="{%static 'img/log3.png'%}" height="50%" width="20%%" alt="">
   </a>
   <div class="header-right">
     <a href="#" class="hr-btn">Help</a>
@@ -18,7 +18,7 @@
     </div> 
   </div>
   <ul class="main-menu">
-    <li><a href="{}">Project APIs</a></li>
+    <li><a href="{%url 'project-apis'%}">Project APIs</a></li>
     <li><a href="{%url 'apis'%}">Profile APIs</a></li>
     <li><a href="#">Profile</a>
       <ul class="sub-menu">

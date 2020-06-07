@@ -11,5 +11,17 @@ class ProfileSerializer(serializers.ModelSerializer):
             'bio'
         )
         model = models.Profile
+class PostSerializer(serializers.ModelSerializer):
+    class Meta:
+        fields = (
+            'id',
+            'title',
+            'url',
+            'description',
+            'photo',
+            'author',
+            'date_posted'
+        )
+        model = models.Post
 
       
