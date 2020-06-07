@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 from django.http import HttpResponseRedirect
 from users.models import Profile
+from django.http import JsonResponse
 # Create your views here.
 class PostListView(LoginRequiredMixin,ListView):
     model=Post
@@ -86,7 +87,7 @@ def project(request,project_id):
     return render(request, "awward/post_detail.html",{"project":project,"profile":profile,
     "ratings":ratings,"form":form, "message":message, 'total_design':total_design, 'total_usability':total_usability, 
     'total_creativity':total_creativity, 'total_content':total_content})
-
+@login_required(login_url='login')
 def search_project(request):
     if request.method == 'GET':
         title = request.GET.get("title")
@@ -101,6 +102,9 @@ def search_project(request):
     else:
         message = "You haven't searched for any image category"
     return render(request, 'awward/results.html', {'message': message})
+def projectsearch(request):
+    title= request.POST.get('name of the project')
+    return JsonResponse(data)
 @login_required(login_url='login')
 def upload(request):
     current_user = request.user

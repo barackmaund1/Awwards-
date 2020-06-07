@@ -7,5 +7,6 @@ urlpatterns = [
     path('project/<int:project_id>', views.project, name='project'),
     path('post/new/', views.upload, name='project-create'),
     path('search/', views.search_project, name='search'),
+    path('ajax/projectsearch/', views.projectsearch, name='search_project'),
    
 ]
