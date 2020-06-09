@@ -29,9 +29,6 @@ class UserPostListView(ListView,LoginRequiredMixin):
 @login_required(login_url='login')
 def project(request,project_id):
     current_user = request.user
-
-    profile =Profile.objects.get(user=current_user)
-    message = "Thank you for voting"
     try:
         project = Post.objects.get(id=project_id)
     except Project.DoesNotExist:
@@ -78,14 +75,14 @@ def project(request,project_id):
         if form.is_valid():
             rating = form.save(commit=False)
             rating.project= project
-            rating.profile = profile
-            if not Rating.objects.filter(profile=profile, project=project).exists():
+            
+            if not Rating.objects.filter( project=project).exists():
                 rating.overall_score = (rating.design+rating.usability+rating.creativity+rating.content)/4
                 rating.save()
     else:
         form = RatingForm()
-    return render(request, "awward/post_detail.html",{"project":project,"profile":profile,
-    "ratings":ratings,"form":form, "message":message, 'total_design':total_design, 'total_usability':total_usability, 
+    return render(request, "awward/post_detail.html",{"project":project,
+    "ratings":ratings,"form":form,  'total_design':total_design, 'total_usability':total_usability, 
     'total_creativity':total_creativity, 'total_content':total_content})
 @login_required(login_url='login')
 def search_project(request):
